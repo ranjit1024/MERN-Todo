@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom"
+
 export function SignIn(){
+    const navigate = useNavigate()
     return <div className="h-screen" style={{
       display:"grid",
       gridTemplateColumns:"60% 40%"
@@ -97,7 +100,7 @@ export function SignIn(){
     </div>
   
   
-  <div className="login flex-col bg-gradient-to-tl to-slate-300 from-blue-200 flex justify-center text-center h-[100%] w-[100%]">
+  <div className="login flex-col bg-gradient-to-tl to-green-200 from-blue-100 flex justify-center items-center text-center h-[100%] w-[100%]">
     <div className="w-[90%] flex flex-col items-center text-center">
   
     <h1 className="mb-10 font-poppins font-semibold text-3xl text-green-700">Sing In</h1>
@@ -134,6 +137,15 @@ export function SignIn(){
               Sign In
             </button>
     </div>
+
+    <div className="text-blue-600 font-semibold hover:cursor-pointer flex items-center justify-center  w-[90%]">
+        <button className="hover:underline underline-offset-4 decoration-1 text-center" 
+        onClick={(e) =>{
+          navigate('/signup')
+        }}
+        >Register</button>
+    </div>
+
   </div>
   
     

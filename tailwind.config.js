@@ -11,6 +11,7 @@ export default {
         'death': "url('src/images/line-in-motion.svg')",
         "overlaping":"url('src/images/overlapping-circles.svg')",
         "topo":"url('src/images/bubbles.svg')",
+        "todo":"url('src/images/personal goals checklist-bro.svg')"
       },
       fontFamily:{
         "poppins":'Poppins'

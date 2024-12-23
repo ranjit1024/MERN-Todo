@@ -9,15 +9,17 @@ export function Landing() {
         gridTemplateColumns: "60% 40%",
       }}
     >
-      <div className="h-screen bg-green-300 bg-hero-pattern"></div>
+      <div className="h-screen bg-green-100  bg-todo bg-contain bg-center bg-no-repeat flex items-center justify-center">
+      {/* <img src="src/images/personal goals checklist-bro.svg" className="w-[80%]" alt="" /> */}
+      </div>
 
-      <div className="flex flex-col bg-green-100 items-center justify-center gap-3">
+      <div className="flex flex-col bg-green-100  items-center justify-center gap-3">
         <div>
           <p className="font-medium text-green-800 text-2xl font-poppins">
             Mangage and Track Your Tasks
           </p>
         </div>
-        <div className="w-[80%] flex-col flex items-center bg-white px-4 rounded-2xl  h-[70%] ">
+        <div className="w-[90%] flex-col flex items-center  px-4 rounded-2xl  h-[70%]  ">
           
           <div className="task-1 p-5  w-[99%] mt-4  bg-blue-300  rounded-lg">
             <div className="flex items-center text-center  ">
@@ -104,7 +106,7 @@ export function Landing() {
           </div>
 
         </div>
-        <div className="w-[80%] flex gap-3 mt-7">
+        <div className="w-[90%] flex gap-3 mt-7">
           <button className="w-3/4 bg-gradient-to-l text-white font-semibold font-poppins text-md mb-4 to-green-800 from-green-500 py-2 rounded-md hover:-translate-y-1 transition-all"
           
           onClick={(e)=>{
