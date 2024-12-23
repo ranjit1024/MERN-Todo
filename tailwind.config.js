@@ -9,6 +9,8 @@ export default {
       backgroundImage:{
         'hero-pattern': "url('src/images/topography.svg')",
         'death': "url('src/images/line-in-motion.svg')",
+        "overlaping":"url('src/images/overlapping-circles.svg')",
+        "topo":"url('src/images/bubbles.svg')",
       },
       fontFamily:{
         "poppins":'Poppins'

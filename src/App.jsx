@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { Landing } from "./Components/Landing";
 import { Signup } from "./Components/Signup";
+import { SignIn } from "./Components/SingIn";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing/>}></Route>
         <Route path="/signup" element={<Signup></Signup>}></Route>
+        <Route path="/signin" element={<SignIn></SignIn>}></Route>
       </Routes>
       </BrowserRouter>
     </div>
