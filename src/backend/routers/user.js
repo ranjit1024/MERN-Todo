@@ -3,15 +3,17 @@ import zod from "zod";
 import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 const user =  import("../db/index.js");
+import bscypt from "bcryptjs"
 
-// import dotenv from "dotenv"
+import dotenv from "dotenv"
 
 export const userRouter = express.Router();
 userRouter.use(express.json());
 
-// dotenv.config('../../.env');
+//getting jwt secret
+dotenv.config({path:'../../.env'});
+console.log(process.env.JWT_SECRET);
 
-// console.log(process.env.JWT_SECRET);
 
 const signupSchma = zod.object({
   username: zod.string().email(),
@@ -19,4 +21,25 @@ const signupSchma = zod.object({
   firstname: zod.string().min(3),
   lastname: zod.string().min(3),
 });
+
+userRouter.post('/signup', async (req, res)=>{
+    const {success} = signupSchma.safeParse(req.body);
+
+    if(!success){
+      return res.status(411).json({
+        message:'Username is invalid'
+      })
+    }
+   
+    // creating hash and 
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(req.body.password, salt);
+    // done
+
+    req.body.password = hash;
+
+    console.log(req.body)
+
+    res.send("Listing...")
+})
 

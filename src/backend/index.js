@@ -14,7 +14,7 @@ const port = process.env.PORT;
 //
 
 
-App.use('/user', userRouter);
+App.use("/user", userRouter)
 
 
 App.listen(port, ()=>{
