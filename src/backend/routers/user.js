@@ -3,12 +3,14 @@ import zod from "zod";
 import bcrypt from "bcryptjs";
 import {User} from "../db/index.js";
 import jwt from "jsonwebtoken"
+import cors from "cors"
 
 
 import dotenv from "dotenv"
 
 export const userRouter = express.Router();
 userRouter.use(express.json());
+userRouter.use(cors())
 
 //getting jwt secret
 dotenv.config({path:'.env'});
@@ -24,6 +26,8 @@ const signupSchma = zod.object({
 
 userRouter.post('/signup', async (req, res)=>{
     const {success} = signupSchma.safeParse(req.body);
+    // console.log(req.body)
+    // console.log(success)
 
     if(!success){
       return res.status(411).json({
@@ -55,10 +59,13 @@ userRouter.post('/signup', async (req, res)=>{
       lastname:req.body.lastname
     })
 
-    jwt.sign({
+    const token = jwt.sign({
       userId:user._id
     },JWT_SECRET)
 
-    res.json("Listing...")
+    res.json({
+      message:'You have Been Successfully Created Account',
+      token
+    })
 })
 

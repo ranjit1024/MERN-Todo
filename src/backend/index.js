@@ -14,9 +14,10 @@ const port = process.env.PORT;
 //
 
 
-App.use("/user", userRouter)
+App.use("/user", userRouter);
+App.use(cors())
 
 
 App.listen(port, ()=>{
-    console.log(`${port} listing on port`)
+    console.log(`Listing On ${port}....`)
 })
