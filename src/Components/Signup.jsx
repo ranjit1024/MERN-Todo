@@ -85,7 +85,7 @@ export function Signup(){
                 Having Dinner
               </p>
               <p className="font-light text-lg  text-neutral-700">
-                Having dinner with fiends
+                Having dinner with friend
               </p>
             </div>
 
