@@ -1,11 +1,19 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 import dotenv from "dotenv";
 
-dotenv.config({path:'../../../.env'});
-const dbString = process.env.DBURL;
+dotenv.config({ path: ".env" });
 
-// console.log(dbString);
-mongoose.connect(dbString)
+const connectDb = async () =>{
+  try{
+    await mongoose.connect(process.env.DBURL);
+    console.log('DB contected')
+  }catch(err){
+    console.log(err.message);
+    process.exit(1);
+  }
+}
+connectDb()
+
 const userSchems = new mongoose.Schema({
   username: {
     type: String,
@@ -18,22 +26,20 @@ const userSchems = new mongoose.Schema({
   password: {
     type: String,
     require: true,
-    minLength: 5,
-    maxLength: 12,
+  
   },
   firstname: {
     type: String,
     require: true,
     minLength: 5,
-    maxLength:12,
+    maxLength: 12,
   },
   lastname: {
-    type:String,
-    require:true,
-    minLength:5,
-    maxLength:12,
-  }
+    type: String,
+    require: true,
+    minLength: 5,
+    maxLength: 12,
+  },
 });
 
-export const User = mongoose.model("User",userSchems);
-
+export const User = mongoose.model("User", userSchems);

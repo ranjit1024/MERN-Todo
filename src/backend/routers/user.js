@@ -1,9 +1,9 @@
 import express from "express";
 import zod from "zod";
 import bcrypt from "bcryptjs";
-import mongoose from "mongoose";
-const user =  import("../db/index.js");
-import bscypt from "bcryptjs"
+import {User} from "../db/index.js";
+import jwt from "jsonwebtoken"
+
 
 import dotenv from "dotenv"
 
@@ -11,8 +11,8 @@ export const userRouter = express.Router();
 userRouter.use(express.json());
 
 //getting jwt secret
-dotenv.config({path:'../../.env'});
-console.log(process.env.JWT_SECRET);
+dotenv.config({path:'.env'});
+const JWT_SECRET = (process.env.JWT_SECRET);
 //
 
 const signupSchma = zod.object({
@@ -38,18 +38,27 @@ userRouter.post('/signup', async (req, res)=>{
 
     req.body.password = hash;
 
-    const findUser = await user.findOne({
+    const findUser = await User.findOne({
       username:req.body.username
     })
 
     if(findUser){
-      return res.status(411).json({
-        message:'Email is already taken'
+      return res.status(401).json({
+        message:'email Already taken'
       })
     }
 
-    // const user1 = await user.create()
+    const user = User.create({
+      username:req.body.username,
+      password:req.body.password,
+      firstname:req.body.firstname,
+      lastname:req.body.lastname
+    })
 
-    res.send("Listing...")
+    jwt.sign({
+      userId:user._id
+    },JWT_SECRET)
+
+    res.json("Listing...")
 })
 

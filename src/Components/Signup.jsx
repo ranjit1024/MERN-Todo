@@ -13,7 +13,7 @@ export function Signup(){
     <div className="bg-gradient-to-tl to-green-200 from-blue-100 first">
       
 
-    <div className="task-1 p-5 mt-7  w-[60%] translate-x-[10%] translate-y-[10%] bg-blue-200  rounded-lg shadow-md shadow-gray-400">
+    <div className="task-1 p-5 mt-7  w-[60%] translate-x-[10%] translate-y-[10%] bg-blue-200 rounded-lg  shadow-md shadow-gray-400">
 <div className="flex items-center text-center  ">
 
 <div className="w-[9%]">
@@ -103,7 +103,7 @@ export function Signup(){
   </div>
 
 
-<div className="login flex-col bg-gradient-to-tl to-green-200 from-blue-200 flex justify-center items-center text-center h-[100%] w-[100%]">
+<div className="login flex-col bg-gradient-to-tl to-green-200 from-blue-100 flex justify-center items-center text-center h-[100%] w-[100%]">
   <div className="w-[90%] flex flex-col items-center text-center">
 
   <h1 className="mb-10 font-poppins font-semibold text-3xl text-green-700">Create an account</h1>
@@ -131,14 +131,13 @@ export function Signup(){
   <input className="w-full bg-gray-100 placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-blue-400 hover:border-blue-300 shadow-sm focus:shadow font-poppins" placeholder="youremail@gmail.com" />
 </div>
 
-<div className="w-[90%] flex  text-start mt-4">
+<div className="w-[90%] flex  text-start mt-4 relative">
   <div className="relative">
   <label className="block mb-1 ml-1 text-sm  text-slate-900 font-poppins font-medium">
       Password
   </label>
-    <input type={pstatus?"text":"password"} className="w-full pl-3 pr-3 py-2 bg-gray-100 font-poppins placeholder:text-slate-400 text-slate-600 text-sm border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-blue-400 hover:border-blue-300 shadow-sm focus:shadow" placeholder="Your password" />
 
-<div className="absolute right-0 inset-y-0 pr-2 flex items-center  mb-1 hover:cursor-pointer">
+  <div className="absolute right-0 inset-y-1 pr-2 text-center hover:cursor-pointer flex items-center">
 
 
 {
@@ -148,6 +147,9 @@ export function Signup(){
    
 
 </div>
+    <input type={pstatus?"text":"password"} className="w-full pl-3 pr-3 py-2 bg-gray-100 font-poppins placeholder:text-slate-400 text-slate-600 text-sm border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-blue-400 hover:border-blue-300 shadow-sm focus:shadow" placeholder="Your password" />
+
+
 
     <p class="flex items-start mt-2 text-xs text-slate-500">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="w-5 h-5 mr-1.5">
@@ -165,7 +167,7 @@ export function Signup(){
           </button>
   </div>
 
-  <div className="text-blue-500 font-medium hover:cursor-pointer ">
+  <div className="text-blue-500  font-medium hover:cursor-pointer ">
         <button className="hover:underline underline-offset-4 decoration-1" 
         onClick={(e) =>{
           navigate('/signin')

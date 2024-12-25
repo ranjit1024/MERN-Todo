@@ -63,7 +63,7 @@ export function Landing() {
             </div>
           </div>
 
-          <div className="task-1 p-5 mt-7  w-[99%]  bg-emerald-300  rounded-lg">
+          <div className="task-1 p-5 mt-7  w-[99%]    bg-emerald-300  rounded-lg">
             <div className="flex items-center text-center  ">
               <div className="w-[9%]">
                 <svg
