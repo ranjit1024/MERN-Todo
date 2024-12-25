@@ -107,14 +107,14 @@ export function Landing() {
 
         </div>
         <div className="w-[85%] flex items-center justify-center gap-3 mt-7">
-          <button className="w-3/4 bg-gradient-to-l text-white font-semibold font-poppins text-md mb-4 to-green-800 from-green-500 py-2 rounded-md hover:-translate-y-1 transition-all"
+          <button className="w-3/4 border-2 border-green-500 hover:bg-green-500 text-black font-semibold font-poppins text-md mb-4  py-2 rounded-md hover:-translate-y-0.5 transition-all"
           
           onClick={(e)=>{
             navigete("/signup")
           }}>
-            Sign Up
+            Create an account
           </button>
-          <button className="w-3/4 bg-gradient-to-l text-white font-semibold font-poppins text-md mb-4 to-green-800 from-green-400 py-2 rounded-md hover:-translate-y-1 transition-all"
+          <button className="w-3/4 bg-gradient-to-l hover:bg-transparent text-white font-semibold font-poppins text-md mb-4 to-green-800 from-green-400 py-2 rounded-md hover:-translate-y-0.5  transition-all"
           onClick={(e)=>{
             navigete('/signin')
           }}

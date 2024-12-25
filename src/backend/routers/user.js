@@ -13,7 +13,7 @@ userRouter.use(express.json());
 //getting jwt secret
 dotenv.config({path:'../../.env'});
 console.log(process.env.JWT_SECRET);
-
+//
 
 const signupSchma = zod.object({
   username: zod.string().email(),
@@ -38,7 +38,17 @@ userRouter.post('/signup', async (req, res)=>{
 
     req.body.password = hash;
 
-    console.log(req.body)
+    const findUser = await user.findOne({
+      username:req.body.username
+    })
+
+    if(findUser){
+      return res.status(411).json({
+        message:'Email is already taken'
+      })
+    }
+
+    // const user1 = await user.create()
 
     res.send("Listing...")
 })

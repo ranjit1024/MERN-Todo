@@ -106,7 +106,7 @@ export function Signup(){
 <div className="login flex-col bg-gradient-to-tl to-green-200 from-blue-200 flex justify-center items-center text-center h-[100%] w-[100%]">
   <div className="w-[90%] flex flex-col items-center text-center">
 
-  <h1 className="mb-10 font-poppins font-semibold text-3xl text-green-700">Sing Up</h1>
+  <h1 className="mb-10 font-poppins font-semibold text-3xl text-green-700">Create an account</h1>
 
     <div className="flex gap-3 mb-5 w-[90%]">
     <div className="w-[90%] flex flex-col justify-start items-start text-center">
@@ -160,7 +160,7 @@ export function Signup(){
 </div>
   
 
-<button className="w-[90%] bg-gradient-to-l text-white font-semibold font-poppins text-md mb-4 to-green-800 from-green-400 py-2 rounded-md hover:-translate-y-1 transition-all mt-10">
+<button className="w-[90%] bg-gradient-to-l text-white font-semibold font-poppins text-md mb-4 to-green-800 from-green-400 py-2 rounded-md hover:-translate-y-0.5  hover:bg-green-200 transition-all mt-10">
             Sign up
           </button>
   </div>
