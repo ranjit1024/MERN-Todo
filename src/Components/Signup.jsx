@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 export function Signup() {
   const navigate = useNavigate();
   let [pstatus, setStatus] = useState(false);
+  let [isEmailValid,setValidEmail] = useState(false);
+
   const firstName = useRef();
   const lastName = useRef();
   const email = useRef();
@@ -127,31 +129,37 @@ export function Signup() {
               />
             </div>{" "}
             <div className="w-[90%] flex flex-col justify-start items-start text-center">
-              <label className="block mb-1 ml-1 text-sm font-poppins  text-slate-900 font-medium">
+              <label htmlFor="lastname" className="block mb-1 ml-1 text-sm font-poppins  text-slate-900 font-medium">
                 Last Name
               </label>
               <input
                 ref={lastName}
                 className="w-full bg-gray-100 placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-blue-400 hover:border-blue-300 font-poppins shadow-sm focus:shadow"
                 placeholder="Last name"
+                id="lastname"
               />
             </div>
           </div>
 
           <div className="w-[90%] flex flex-col justify-start items-start text-start">
-            <label className="block mb-1 ml-1 text-sm  text-slate-900 font-poppins font-medium">
+            <label htmlFor="email" className="block mb-1 ml-1 text-sm  text-slate-900 font-poppins font-medium">
               Email
             </label>
             <input
               ref={email}
-              className="w-full bg-gray-100 placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-blue-400 hover:border-blue-300 shadow-sm focus:shadow font-poppins"
+              className="email w-full bg-gray-100 placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-blue-400 hover:border-blue-300 shadow-sm focus:shadow font-poppins"
               placeholder="youremail@gmail.com"
+              id="email"
             />
+            {
+              isEmailValid?(<EmptyEmail/>):null
+            }
+          
           </div>
 
           <div className="w-[90%] flex  text-start mt-4 relative">
             <div className="relative">
-              <label className="block mb-1 ml-1 text-sm  text-slate-900 font-poppins font-medium">
+              <label htmlFor="password" className="block mb-1 ml-1 text-sm  text-slate-900 font-poppins font-medium">
                 Password
               </label>
 
@@ -161,6 +169,7 @@ export function Signup() {
                   type={pstatus ? "text" : "password"}
                   className="w-full pl-3 pr-3 py-2 bg-gray-100 font-poppins placeholder:text-slate-400 text-slate-600 text-sm border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-blue-400 hover:border-blue-300 shadow-sm focus:shadow"
                   placeholder="Your password"
+                  id="password"
                 />
                 <div className="absolute right-0 inset-y-1 pr-2 hover:cursor-pointer flex items-center ">
                   {pstatus ? (
@@ -193,7 +202,26 @@ export function Signup() {
           <button
             className="w-[90%] bg-gradient-to-l text-white font-semibold font-poppins text-md mb-4 to-green-800 from-green-400 py-2 rounded-md hover:-translate-y-0.5  hover:bg-green-200 transition-all mt-10"
             onClick={async (e) => {
+              if(firstName.current.value == ""){
+                document.querySelector('#firstname').style.border = "1px solid red"
 
+              }
+               if(lastName.current.value == ""){
+                document.querySelector("#lastname").style.border = "1px solid red"
+                
+              }
+               if( email.current.value == ""){
+                document.querySelector("#email").style.border = "1px solid red"
+                
+              }
+               if(password.current.value == ""){
+                document.querySelector("#password").style.border = "1px solid red"
+                return;
+              }
+
+              if(message == "email Already taken"){
+                return setValidEmail(true)
+              }
               const response =  await fetch("http://192.168.2.6:3000/user/signup", {
                 method: "POST",
 
@@ -212,9 +240,11 @@ export function Signup() {
               })
               const data = await response.json();
               const token = data.token;
-              console.log(data.message)
-              console.log(data.token)
+              const message = data.message;
+              
+              
             }
+            
             
           }
           >
@@ -233,6 +263,7 @@ export function Signup() {
           </button>
         </div>
       </div>
+      
     </div>
   );
 }
@@ -290,4 +321,8 @@ function ByLashEye({ setStatus }) {
       </svg>
     </button>
   );
+}
+
+function EmptyEmail(){
+  return <h1 className="text-end ml-1 mt-1 font-poppins font-normal text-red-700">Email is already taken</h1>
 }

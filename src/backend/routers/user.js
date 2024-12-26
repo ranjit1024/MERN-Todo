@@ -20,11 +20,12 @@ const JWT_SECRET = (process.env.JWT_SECRET);
 const signupSchma = zod.object({
   username: zod.string().email(),
   password: zod.string().min(5),
-  firstname: zod.string().min(3),
-  lastname: zod.string().min(3),
+  firstname: zod.string().max(12),
+  lastname: zod.string().max(12),
 });
 
 userRouter.post('/signup', async (req, res)=>{
+   console.log("Listing..")
     const {success} = signupSchma.safeParse(req.body);
     // console.log(req.body)
     // console.log(success)

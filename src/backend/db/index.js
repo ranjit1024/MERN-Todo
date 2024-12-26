@@ -6,7 +6,7 @@ dotenv.config({ path: ".env" });
 const connectDb = async () =>{
   try{
     await mongoose.connect(process.env.DBURL);
-    console.log('DB contected')
+    console.log('DB contected...')
   }catch(err){
     console.log(err.message);
     process.exit(1);
@@ -31,13 +31,13 @@ const userSchems = new mongoose.Schema({
   firstname: {
     type: String,
     require: true,
-    minLength: 5,
+    
     maxLength: 12,
   },
   lastname: {
     type: String,
     require: true,
-    minLength: 5,
+  
     maxLength: 12,
   },
 });
