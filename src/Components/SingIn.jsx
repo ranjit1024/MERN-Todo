@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Navigate } from "react-router-dom";
 
 export function SignIn() {
   const navigate = useNavigate();
   let [pstatus, setStatus] = useState(false);
+  const token = localStorage.getItem("Bearer");
   return (
     <div
       className="h-screen"
@@ -12,6 +13,7 @@ export function SignIn() {
         gridTemplateColumns: "60% 40%",
       }}
     >
+      if(token){<Navigate to={"/todo"} />}
       <div className="bg-gradient-to-tl to-green-200 from-blue-100 first">
         <div className="task-1 p-5 mt-7  w-[60%] translate-x-[10%] translate-y-[10%] bg-blue-200  rounded-lg shadow-md shadow-gray-400">
           <div className="flex items-center text-center  ">
@@ -97,7 +99,6 @@ export function SignIn() {
           </div>
         </div>
       </div>
-
       <div className="login flex-col bg-gradient-to-tl to-green-200 from-blue-100 flex justify-center items-center text-center h-[100%] w-[100%]">
         <div className="w-[90%] flex flex-col items-center text-center">
           <h1 className="mb-10 font-poppins font-semibold text-3xl text-green-700">
@@ -115,37 +116,44 @@ export function SignIn() {
           </div>
 
           <div className="w-[90%] flex  text-start mt-4 relative">
-  <div className="relative">
-  <label className="block mb-1 ml-1 text-sm  text-slate-900 font-poppins font-medium">
-      Password
-  </label>
+            <div className="relative">
+              <label className="block mb-1 ml-1 text-sm  text-slate-900 font-poppins font-medium">
+                Password
+              </label>
 
-<div className="relative">
+              <div className="relative">
+                <input
+                  type={pstatus ? "text" : "password"}
+                  className="w-full pl-3 pr-3 py-2 bg-gray-100 font-poppins placeholder:text-slate-400 text-slate-600 text-sm border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-blue-400 hover:border-blue-300 shadow-sm focus:shadow"
+                  placeholder="Your password"
+                />
+                <div className="absolute right-0 inset-y-1 pr-2 hover:cursor-pointer flex items-center ">
+                  {pstatus ? (
+                    <ByEye setStatus={setStatus}></ByEye>
+                  ) : (
+                    <ByLashEye setStatus={setStatus}></ByLashEye>
+                  )}
+                </div>
+              </div>
 
-
-    <input type={pstatus?"text":"password"} className="w-full pl-3 pr-3 py-2 bg-gray-100 font-poppins placeholder:text-slate-400 text-slate-600 text-sm border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-blue-400 hover:border-blue-300 shadow-sm focus:shadow" placeholder="Your password" />
-  <div className="absolute right-0 inset-y-1 pr-2 hover:cursor-pointer flex items-center ">
-
-
-{
-  (pstatus) ? <ByEye setStatus={setStatus}></ByEye> : <ByLashEye setStatus={setStatus}></ByLashEye>
-}
-  
-   
-</div>
-</div>
-
-
-
-    <p class="flex items-start mt-2 text-xs text-slate-500">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" class="w-5 h-5 mr-1.5">
-        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" />
-      </svg>
- 
-      Use at least 8 characters, one uppercase, one lowercase and one number.
-    </p>    
-  </div>
-</div>
+              <p class="flex items-start mt-2 text-xs text-slate-500">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="gray"
+                  class="w-5 h-5 mr-1.5"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Use at least 8 characters, one uppercase, one lowercase and one
+                number.
+              </p>
+            </div>
+          </div>
 
           <button className="w-[90%] bg-gradient-to-l text-white font-semibold font-poppins text-md mb-4 to-green-800 from-green-400 py-2 rounded-md hover:-translate-y-1 transition-all mt-10">
             Sign In

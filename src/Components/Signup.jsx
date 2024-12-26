@@ -1,17 +1,18 @@
-import axios from "axios";
-
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
+import { Todo } from "./Todo";
 
 export function Signup() {
   const navigate = useNavigate();
   let [pstatus, setStatus] = useState(false);
-  let [isEmailValid,setValidEmail] = useState(false);
+  let [isEmailValid, setValidEmail] = useState(false);
 
   const firstName = useRef();
   const lastName = useRef();
   const email = useRef();
   const password = useRef();
+
+  const token = localStorage.getItem("Bearer");
 
   return (
     <div
@@ -21,6 +22,10 @@ export function Signup() {
         gridTemplateColumns: "60% 40%",
       }}
     >
+      {
+        token? <Navigate to={"/todo"}/>:null
+      }
+
       <div className="bg-gradient-to-tl to-green-200 from-blue-100 first">
         <div className="task-1 p-5 mt-7  w-[60%] translate-x-[10%] translate-y-[10%] bg-blue-200 rounded-lg  shadow-md shadow-gray-400">
           <div className="flex items-center text-center  ">
@@ -106,7 +111,6 @@ export function Signup() {
           </div>
         </div>
       </div>
-
       <div className="login flex-col bg-gradient-to-tl to-green-200 from-blue-100 flex justify-center items-center text-center h-[100%] w-[100%]">
         <div className="w-[90%] flex flex-col items-center text-center">
           <h1 className="mb-10 font-poppins font-semibold text-3xl text-green-700">
@@ -129,7 +133,10 @@ export function Signup() {
               />
             </div>{" "}
             <div className="w-[90%] flex flex-col justify-start items-start text-center">
-              <label htmlFor="lastname" className="block mb-1 ml-1 text-sm font-poppins  text-slate-900 font-medium">
+              <label
+                htmlFor="lastname"
+                className="block mb-1 ml-1 text-sm font-poppins  text-slate-900 font-medium"
+              >
                 Last Name
               </label>
               <input
@@ -142,7 +149,10 @@ export function Signup() {
           </div>
 
           <div className="w-[90%] flex flex-col justify-start items-start text-start">
-            <label htmlFor="email" className="block mb-1 ml-1 text-sm  text-slate-900 font-poppins font-medium">
+            <label
+              htmlFor="email"
+              className="block mb-1 ml-1 text-sm  text-slate-900 font-poppins font-medium"
+            >
               Email
             </label>
             <input
@@ -151,15 +161,15 @@ export function Signup() {
               placeholder="youremail@gmail.com"
               id="email"
             />
-            {
-              isEmailValid?(<EmptyEmail/>):null
-            }
-          
+            {isEmailValid ? <EmptyEmail /> : null}
           </div>
 
           <div className="w-[90%] flex  text-start mt-4 relative">
             <div className="relative">
-              <label htmlFor="password" className="block mb-1 ml-1 text-sm  text-slate-900 font-poppins font-medium">
+              <label
+                htmlFor="password"
+                className="block mb-1 ml-1 text-sm  text-slate-900 font-poppins font-medium"
+              >
                 Password
               </label>
 
@@ -202,51 +212,65 @@ export function Signup() {
           <button
             className="w-[90%] bg-gradient-to-l text-white font-semibold font-poppins text-md mb-4 to-green-800 from-green-400 py-2 rounded-md hover:-translate-y-0.5  hover:bg-green-200 transition-all mt-10"
             onClick={async (e) => {
-              if(firstName.current.value == ""){
-                document.querySelector('#firstname').style.border = "1px solid red"
-
+              if (firstName.current.value == "") {
+                document.querySelector("#firstname").style.border =
+                  "1px solid red";
               }
-               if(lastName.current.value == ""){
-                document.querySelector("#lastname").style.border = "1px solid red"
-                
+              if (lastName.current.value == "") {
+                document.querySelector("#lastname").style.border =
+                  "1px solid red";
               }
-               if( email.current.value == ""){
-                document.querySelector("#email").style.border = "1px solid red"
-                
+              if (email.current.value == "") {
+                document.querySelector("#email").style.border = "1px solid red";
               }
-               if(password.current.value == ""){
-                document.querySelector("#password").style.border = "1px solid red"
+              if (password.current.value == "") {
+                document.querySelector("#password").style.border =
+                  "1px solid red";
                 return;
               }
 
-              if(message == "email Already taken"){
-                return setValidEmail(true)
-              }
-              const response =  await fetch("http://192.168.2.6:3000/user/signup", {
-                method: "POST",
+              const response = await fetch(
+                "http://192.168.2.6:3000/user/signup",
+                {
+                  method: "POST",
 
-                body:JSON.stringify({
-                  username: email.current.value,
-                  password: password.current.value,
-                  firstname: firstName.current.value,
-                  lastname: lastName.current.value,
-                }),
+                  body: JSON.stringify({
+                    username: email.current.value,
+                    password: password.current.value,
+                    firstname: firstName.current.value,
+                    lastname: lastName.current.value,
+                  }),
 
-
-                headers: {
-                  "Content-type": "application/json; charset=UTF-8"
-              }
-
-              })
+                  headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    authorization: "none",
+                  },
+                }
+              );
               const data = await response.json();
               const token = data.token;
               const message = data.message;
-              
-              
-            }
-            
-            
-          }
+
+              //checking for unique email
+              if (message == "email Already taken") {
+                return setValidEmail(true);
+              }
+
+              //
+
+              localStorage.setItem("Bearer", token);
+
+              fetch("http://192.168.2.6:3000/user/signup", {
+                method: "GET",
+                headers: {
+                  auauthorization: `Bearer ${token}`,
+                },
+              });
+
+              if (message == "You have Been Successfully Created Account") {
+                return navigate("/todo", { replace: true });
+              }
+            }}
           >
             Sign up
           </button>
@@ -263,7 +287,6 @@ export function Signup() {
           </button>
         </div>
       </div>
-      
     </div>
   );
 }
@@ -323,6 +346,10 @@ function ByLashEye({ setStatus }) {
   );
 }
 
-function EmptyEmail(){
-  return <h1 className="text-end ml-1 mt-1 font-poppins font-normal text-red-700">Email is already taken</h1>
+function EmptyEmail() {
+  return (
+    <h1 className="text-end ml-1 mt-1 font-poppins font-normal text-red-700">
+      Email is already in Use
+    </h1>
+  );
 }

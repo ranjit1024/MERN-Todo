@@ -110,13 +110,27 @@ export function Landing() {
           <button className="w-3/4 border-2 border-green-500 hover:bg-green-500 text-black font-semibold font-poppins text-md mb-4  py-2 rounded-md hover:-translate-y-0.5 transition-all"
           
           onClick={(e)=>{
-            navigete("/signup")
+
+            const token = localStorage.getItem('Bearer')
+            if(!localStorage.getItem(token)){
+              navigete('/signup', {replace:true})
+              return
+            }
+            navigete("/todo")
+            
           }}>
             Create an account
           </button>
           <button className="w-3/4 bg-gradient-to-l hover:bg-transparent text-white font-semibold font-poppins text-md mb-4 to-green-800 from-green-400 py-2 rounded-md hover:-translate-y-0.5  transition-all"
           onClick={(e)=>{
-            navigete('/signin')
+             const token = localStorage.getItem('Bearer')
+            if(!localStorage.getItem(token)){
+                console.log("dfsd")
+               navigete('/signin', {replace:true})
+               return
+            }
+            navigete("/todo")
+
           }}
           >
             Sign In
