@@ -1,9 +1,14 @@
-import { useState } from "react";
-import { useNavigate,Navigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
 
 export function SignIn() {
   const navigate = useNavigate();
   let [pstatus, setStatus] = useState(false);
+  const username = useRef();
+  const password = useRef();
+  let [isEmailValid, setValidEmail] = useState(false);
+  let [isPasswordValid, setPasswordValid] = useState(false);
+
   const token = localStorage.getItem("Bearer");
   return (
     <div
@@ -13,7 +18,7 @@ export function SignIn() {
         gridTemplateColumns: "60% 40%",
       }}
     >
-      if(token){<Navigate to={"/todo"} />}
+      {token ? <Navigate to={"/todo"} /> : null}
       <div className="bg-gradient-to-tl to-green-200 from-blue-100 first">
         <div className="task-1 p-5 mt-7  w-[60%] translate-x-[10%] translate-y-[10%] bg-blue-200  rounded-lg shadow-md shadow-gray-400">
           <div className="flex items-center text-center  ">
@@ -102,17 +107,23 @@ export function SignIn() {
       <div className="login flex-col bg-gradient-to-tl to-green-200 from-blue-100 flex justify-center items-center text-center h-[100%] w-[100%]">
         <div className="w-[90%] flex flex-col items-center text-center">
           <h1 className="mb-10 font-poppins font-semibold text-3xl text-green-700">
-            Sing In
+            Sign In
           </h1>
 
           <div className="w-[90%] flex flex-col justify-start items-start text-start">
-            <label className="block mb-1 ml-1 text-sm  text-slate-900 font-poppins font-medium">
+            <label
+              htmlFor="email"
+              className=" mb-1 ml-1 text-sm  text-slate-900 font-poppins font-medium"
+            >
               Email
             </label>
             <input
               className="w-full bg-gray-100 placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-blue-400 hover:border-blue-300 shadow-sm focus:shadow font-poppins"
               placeholder="youremail@gmail.com"
+              ref={username}
+              id="email"
             />
+            {isEmailValid ? <EmailValidator /> : null}
           </div>
 
           <div className="w-[90%] flex  text-start mt-4 relative">
@@ -124,8 +135,10 @@ export function SignIn() {
               <div className="relative">
                 <input
                   type={pstatus ? "text" : "password"}
+                  ref={password}
                   className="w-full pl-3 pr-3 py-2 bg-gray-100 font-poppins placeholder:text-slate-400 text-slate-600 text-sm border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-blue-400 hover:border-blue-300 shadow-sm focus:shadow"
                   placeholder="Your password"
+                  id="password"
                 />
                 <div className="absolute right-0 inset-y-1 pr-2 hover:cursor-pointer flex items-center ">
                   {pstatus ? (
@@ -135,6 +148,10 @@ export function SignIn() {
                   )}
                 </div>
               </div>
+                  {
+                    isPasswordValid?<PasswordValidator/>:null
+                  }
+             
 
               <p class="flex items-start mt-2 text-xs text-slate-500">
                 <svg
@@ -155,7 +172,47 @@ export function SignIn() {
             </div>
           </div>
 
-          <button className="w-[90%] bg-gradient-to-l text-white font-semibold font-poppins text-md mb-4 to-green-800 from-green-400 py-2 rounded-md hover:-translate-y-1 transition-all mt-10">
+          <button
+            className="w-[90%] bg-gradient-to-l text-white font-semibold font-poppins text-md mb-4 to-green-800 from-green-400 py-2 rounded-md hover:-translate-y-1 transition-all mt-10"
+            onClick={async (e) => {
+              if (username.current.value == "") {
+                document.querySelector("#email").style.border = "1px solid red";
+              }
+              if (password.current.value == "") {
+                document.querySelector("#password").style.border =
+                  "1px solid red";
+                return;
+              }
+
+              const response = await fetch(
+                "http://192.168.2.6:3000/user/signin",
+                {
+                  method: "POST",
+
+                  body: JSON.stringify({
+                    username: username.current.value,
+                    password: password.current.value,
+                  }),
+                  headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    authorization: "none",
+                  },
+                }
+              );
+              const data = await response.json();
+              // console.log(data.message);
+              if (data.message == "username Not found") {
+                setValidEmail(true);
+                return;
+              }
+              if (data.message == "password is incorrect") {
+                setPasswordValid(true);
+                return;
+              }
+              localStorage.setItem("Bearer", data.token);
+              navigate("/todo")
+            }}
+          >
             Sign In
           </button>
         </div>
@@ -227,5 +284,17 @@ function ByLashEye({ setStatus }) {
         />
       </svg>
     </button>
+  );
+}
+function EmailValidator() {
+  return (
+    <h1 className="ml-1 mt-1 font-normal text-red-600">Email not found</h1>
+  );
+}
+function PasswordValidator() {
+  return (
+    <h1 className="ml-1 mt-1 font-normal text-red-600">
+      Password is incorrect
+    </h1>
   );
 }
