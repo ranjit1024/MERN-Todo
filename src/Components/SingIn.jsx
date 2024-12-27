@@ -195,14 +195,14 @@ export function SignIn() {
                   }),
                   headers: {
                     "Content-type": "application/json; charset=UTF-8",
-                    authorization: "none",
+                   
                   },
                 }
               );
               const data = await response.json();
               // console.log(data.message);
               if (data.message == "username Not found") {
-                setValidEmail(true);
+                setValidEmail(true);;
                 return;
               }
               if (data.message == "password is incorrect") {
@@ -210,7 +210,10 @@ export function SignIn() {
                 return;
               }
               localStorage.setItem("Bearer", data.token);
-              navigate("/todo")
+              navigate("/todo");
+
+            
+
             }}
           >
             Sign In

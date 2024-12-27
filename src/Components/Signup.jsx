@@ -260,12 +260,7 @@ export function Signup() {
 
               localStorage.setItem("Bearer", token);
 
-              fetch("http://192.168.2.6:3000/user/signup", {
-                method: "GET",
-                headers: {
-                  auauthorization: `Bearer ${token}`,
-                },
-              });
+             
 
               if (message == "You have Been Successfully Created Account") {
                 return navigate("/todo", { replace: true });

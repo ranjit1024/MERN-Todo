@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { userRouter } from "./routers/user.js";
+import { todoRouter } from "./routers/todo.js";
 
 
 const App = express();
@@ -15,6 +16,7 @@ const port = process.env.PORT;
 
 
 App.use("/user", userRouter);
+App.use("/todo", todoRouter)
 App.use(cors())
 
 

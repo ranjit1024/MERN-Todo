@@ -1,5 +1,6 @@
 import mongoose, { mongo } from "mongoose";
 import dotenv from "dotenv";
+import { date } from "zod";
 
 dotenv.config({ path: ".env" });
 
@@ -42,4 +43,19 @@ const userSchems = new mongoose.Schema({
   },
 });
 
+const TodoSchema = new mongoose.Schema({
+ date:{
+  type:Date,
+  require:true
+ },
+  title:{
+    type: String,
+    require: true
+  },
+  descripition:{
+    type:String,
+    require: true
+  }
+})
+export const Todo = mongoose.model('Todo', TodoSchema);
 export const User = mongoose.model("User", userSchems);
