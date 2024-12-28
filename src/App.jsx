@@ -8,7 +8,7 @@ import { Landing } from "./Components/Landing";
 import { Signup } from "./Components/Signup";
 import { SignIn } from "./Components/SingIn";
 import { Todo } from "./Components/Todo";
-
+import { RecoilRoot } from "recoil";
 
 function App() {
   return (

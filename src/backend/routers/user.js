@@ -100,22 +100,28 @@ userRouter.post("/signin", async (req, res) => {
   const passwordFinder = await User.findOne({
     username:req.body.username
   });
+
   const userPassword = passwordFinder.password;
   //done
   const isMathch = await bcrypt.compare(req.body.password,userPassword);
   console.log(isMathch);
+
   if(!isMathch){
     return res.status(401).json({
       message:'password is incorrect'
     })
   }
 
+ 
+
   const token = jwt.sign(
     {
-      userId: User._id,
+      userId: findUser._id,
     },
     JWT_SECRET
   );
+
+  console.log(token)
 
   res.status(200).json({
     message: "Your are an user",

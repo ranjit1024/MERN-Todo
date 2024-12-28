@@ -44,6 +44,11 @@ const userSchems = new mongoose.Schema({
 });
 
 const TodoSchema = new mongoose.Schema({
+  userId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User',
+    require:true
+  },
  date:{
   type:Date,
   require:true

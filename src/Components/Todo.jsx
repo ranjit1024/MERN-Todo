@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useState,useRef } from "react";
+import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { dateAtom, desAtom, titleAtom } from "../state/atom/atom.jsx";
 
 export function Todo() {
   let [add, setAdd] = useState(false);
+  let title = useRef();
+  let descripition = useRef();
   return (
+    <RecoilRoot>
     <div className="h-screen flex items-center flex-col w-full bg-gradient-to-tl to-green-100 from-blue-50">
       <div className="mt-12 w-full flex flex-col items-center">
         <h1 className="text-center font-poppins font-semibold text-3xl text-green-600">
@@ -20,16 +25,21 @@ export function Todo() {
       </div>
 
       
-      {add ? <AddTodo  setAdd={setAdd}></AddTodo> : null}
+      {add ? <AddTodo  setAdd={setAdd} task={title} des={descripition} ></AddTodo> : null}
 
-    <div className="w-[90%] ">
+    <div className="w-[90%] flex gap-4 flex-wrap">
+      <ListTask></ListTask>
+      <ListTask></ListTask>
       <ListTask></ListTask>
     </div>
     </div>
+  </RecoilRoot>
   );
 }
 
-function AddTodo({setAdd}) {
+function AddTodo({setAdd,task,des}) {
+  let [title,setTitle] = useRecoilState(titleAtom);
+  let [descripition,setDes] = useRecoilState(desAtom);
   return (
     <div
       className="w-screen h-screen  fixed flex items-center justify-center pointer-events-auto transition-all
@@ -51,15 +61,35 @@ function AddTodo({setAdd}) {
           <input
             className=" bg-white font-medium w-[100%] mt-4 shadow-blue-100 placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-green-400 hover:border-blue-300 shadow-sm focus:shadow font-poppins"
             placeholder="Task Name"
+            ref={task}
           />
           <textarea
             className=" bg-white w-[100%] font-normal h-[100%] mt-4 mb-7  shadow-blue-100 placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-green-400 hover:border-blue-300 shadow-sm focus:shadow font-poppins"
             placeholder="Task Description"
+            ref={des}
           />
          
-         <button className="bg-green-600 px-3 py-2 rounded-md font-medium text-white hover:scale-105 hover:bg-green-500 transition-all" onClick={()=>{
-            setAdd(false);
-           
+         <button className="bg-green-600 px-3 py-2 rounded-md font-medium text-white hover:scale-105 hover:bg-green-500 transition-all" onClick={async (e)=>{
+            setAdd(false)
+            setTitle(task.current.value);
+            setDes(des.current.value);
+
+            const token = localStorage.getItem('Bearer');
+            console.log(token)
+            const response = await fetch("http://192.168.2.6:3000/todo/createtodo", {
+              method:"POST",
+
+              body:{
+                title:title,
+                descripition:descripition,
+              },
+              headers:{
+                Authorization:`Bearer ${token}`
+              }
+            })
+            const data = await response.json();
+            console.log(data);
+            
          }
          }>Add Task</button>
         </div>
@@ -113,8 +143,7 @@ function ListTask(){
 }
 
 function GetDate(){
-    const date = new Date()
-    const currentDate = date.toDateString();
+    const date = useRecoilValue(dateAtom);
     return <div className="flex font-medium text-gray-600 gap-2 w-full items-center ">
          <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +160,7 @@ function GetDate(){
                 />
               </svg>
         {
-            currentDate
+            date
         }
 
     </div>

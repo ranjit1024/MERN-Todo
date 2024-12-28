@@ -200,7 +200,7 @@ export function SignIn() {
                 }
               );
               const data = await response.json();
-              // console.log(data.message);
+              console.log("anoterh",data.token);
               if (data.message == "username Not found") {
                 setValidEmail(true);;
                 return;
