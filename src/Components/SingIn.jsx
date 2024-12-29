@@ -101,7 +101,7 @@ export function SignIn() {
             <p>#fun </p>
             <p>#eating out</p>
             <p>#testy</p>
-          </div>
+          </div>stringify
         </div>
       </div>
       <div className="login flex-col bg-gradient-to-tl to-green-200 from-blue-100 flex justify-center items-center text-center h-[100%] w-[100%]">
