@@ -52,19 +52,23 @@ userRouter.post("/signup", async (req, res) => {
     });
   }
 
-  const user = User.create({
+  const user = await User.create({
     username: req.body.username,
     password: req.body.password,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
   });
 
+
+  
   const token = jwt.sign(
     {
       userId: user._id,
     },
     JWT_SECRET
   );
+  console.log(user)
+  console.log(user._id)
 
   res.json({
     message: "You have Been Successfully Created Account",

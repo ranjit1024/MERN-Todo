@@ -68,5 +68,33 @@ const TodoSchema = new mongoose.Schema({
     require: true,
   }
 });
+
+const completedTodo = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    require: true,
+    
+  },
+  date: {
+    type: String,
+    require: true,
+  
+  },
+  title: {
+    type: String,
+    require: true,
+    trim:true,
+  },
+  descripition: {
+    type: String,
+    require: true,
+  },
+  iscompleted: {
+    type: Boolean,
+    require: true,
+  }
+})
 export const Todo = mongoose.model("Todo", TodoSchema);
 export const User = mongoose.model("User", userSchems);
+export const Complete = mongoose.model("completed", completedTodo);

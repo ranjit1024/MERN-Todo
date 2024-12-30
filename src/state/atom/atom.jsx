@@ -33,11 +33,21 @@ export const todoList = atom({
     })
 })
 
-export const randomcolor = selector({
-    key:'colorsSelctor',
-    get: ({get}) =>{
-           const randNumber = Math.floor(Math.random() * (5))
-            const colors = ["emerald", "indigo", "cyan","violet" ];
-            return(colors[randNumber])
-    }
+export const completeTodoList = atom({
+    key:"allcompleAtom",
+    default: selector({
+        key:"fetchallcomlettodo",
+        get: async () =>{
+            const token = localStorage.getItem("Bearer");
+            const response = await fetch("http://192.168.2.6:3000/todo/completetodo",{
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    authorization:`Bearer ${token}`
+                  },
+            });
+            const data = response.json();
+            
+            return data;
+        }
+    })
 })
