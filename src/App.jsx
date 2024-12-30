@@ -9,6 +9,7 @@ import { Signup } from "./Components/Signup";
 import { SignIn } from "./Components/SingIn";
 import { Todo } from "./Components/Todo";
 import { RecoilRoot } from "recoil";
+import { Signout } from "./Components/Singnout";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/signup" element={<Signup></Signup>}></Route>
         <Route path="/signin" element={<SignIn></SignIn>}></Route>
         <Route path="/todo" element={<Todo></Todo>}></Route>
+        <Route path="/signout" element={<Signout></Signout>}></Route>
       </Routes>
       </BrowserRouter>
     </div>
