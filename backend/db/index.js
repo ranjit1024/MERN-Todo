@@ -1,6 +1,6 @@
-import mongoose, { mongo } from "mongoose";
-import dotenv from "dotenv";
-import { date } from "zod";
+const mongoose =  require("mongoose");
+const dotenv  = require("dotenv");
+const { date } =  require("zod");
 
 dotenv.config({ path: ".env" });
 
@@ -95,6 +95,10 @@ const completedTodo = new mongoose.Schema({
     require: true,
   }
 })
-export const Todo = mongoose.model("Todo", TodoSchema);
-export const User = mongoose.model("User", userSchems);
-export const Complete = mongoose.model("completed", completedTodo);
+ const Todo = mongoose.model("Todo", TodoSchema);
+ const User = mongoose.model("User", userSchems);
+ const Complete = mongoose.model("completed", completedTodo);
+
+module.exports  = {
+  Todo,User,Complete
+}

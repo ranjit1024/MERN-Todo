@@ -1,13 +1,13 @@
-import express from "express";
-import zod from "zod";
-import bcrypt from "bcryptjs";
-import { User } from "../db/index.js";
-import jwt from "jsonwebtoken";
-import cors from "cors";
+const express =  require("express");
+const  zod =  require("zod");
+const  bcrypt = require("bcryptjs");
+const  { User } =  require("../db/index.js");
+const  jwt  = require("jsonwebtoken");
+const  cors  = require("cors");
 
-import dotenv from "dotenv";
+const  dotenv =  require("dotenv");
 
-export const userRouter = express.Router();
+const userRouter = express.Router();
 userRouter.use(express.json());
 userRouter.use(cors());
 
@@ -132,3 +132,7 @@ userRouter.post("/signin", async (req, res) => {
     token,
   });
 });
+
+module.exports = {
+  userRouter
+}

@@ -1,10 +1,10 @@
-import express from "express";
-import cors from "cors";
-import { authMiddlware } from "../middleware.js";
-import { Complete, Todo, User } from "../db/index.js";
+const express =  require("express");
+const cors =  require("cors");
+const { authMiddlware }  = require("../middleware.js");
+const { Complete, Todo, User } =  require( "../db/index.js");
 let count = 1;
 
-export const todoRouter = express.Router();
+ const todoRouter = express.Router();
 todoRouter.use(cors());
 todoRouter.use(express.json());
 
@@ -72,3 +72,7 @@ todoRouter.get("/completetodo", authMiddlware, async (req,res)=>{
       })
    }
 })
+
+module.exports = {
+   todoRouter
+}

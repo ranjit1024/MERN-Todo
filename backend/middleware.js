@@ -1,12 +1,12 @@
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv"
-import { User } from "./db/index.js";
+const jwt  =  require("jsonwebtoken");
+const dotenv = require("dotenv");
+const { User }  = require("./db/index.js");
 dotenv.config({path:".env"});
 const JWT_SECRET = process.env.JWT_SECRET;
 
 
 
-export const authMiddlware  = async(req,res,next) => {
+const authMiddlware  = async(req,res,next) => {
     
     const authHeader = req.headers.authorization;
     
@@ -33,4 +33,7 @@ export const authMiddlware  = async(req,res,next) => {
     }
    
 
+}
+module.exports = {
+    authMiddlware
 }
