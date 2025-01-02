@@ -18,9 +18,7 @@ const port = process.env.PORT;
 
 App.use("/user", userRouter);
 App.use("/todo", todoRouter)
-App.use(cors({
-    origin:""
-}))
+App.use(cors())
 
 
 App.listen(port, ()=>{
