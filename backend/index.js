@@ -20,6 +20,9 @@ App.use("/user", userRouter);
 App.use("/todo", todoRouter)
 App.use(cors())
 
+App.get('/', (req,res)=>{
+    res.send('this is good')
+})
 
 App.listen(port, ()=>{
     console.log(`Listing On ${port}....`)
