@@ -5,7 +5,10 @@ const { Complete, Todo, User } =  require( "../db/index.js");
 let count = 1;
 
  const todoRouter = express.Router();
-todoRouter.use(cors());
+todoRouter.use(cors({
+   origin:"https://mern-todo-59u7.onrender.com",
+   credentials:true
+}));
 todoRouter.use(express.json());
 
 

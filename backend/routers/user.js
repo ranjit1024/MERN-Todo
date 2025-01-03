@@ -9,9 +9,10 @@ const  dotenv =  require("dotenv");
 
 const userRouter = express.Router();
 userRouter.use(express.json());
-userRouter.use(cors(
-  
-));
+userRouter.use(cors({
+  origin:"https://mern-todo-59u7.onrender.com",
+  credentials:true,
+}));
 
 //getting jwt secret
 dotenv.config({ path: ".env" });

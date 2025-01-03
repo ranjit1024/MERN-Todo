@@ -32,7 +32,10 @@ App.get("*", (req,res)=>{
     res.sendFile(path.resolve(_dirname, "FrontEnd" , "dist" , "index.html"))
 })
 
-App.use(cors())
+App.use(cors({
+    origin:"https://mern-todo-59u7.onrender.com",
+    credentials:true,
+}))
 
 
 
