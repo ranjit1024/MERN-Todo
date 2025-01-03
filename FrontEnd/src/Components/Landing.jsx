@@ -10,7 +10,7 @@ export function Landing() {
       }}
     >
       <div className="h-screen bg-green-100  bg-todo bg-contain bg-center bg-no-repeat flex items-center justify-center">
-      {/* <img src="src/images/personal goals checklist-bro.svg" className="w-[80%]" alt="" /> */}
+        
       </div>
 
       <div className="flex flex-col bg-green-100  items-center justify-center gap-3">
