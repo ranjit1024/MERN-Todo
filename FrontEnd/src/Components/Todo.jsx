@@ -507,13 +507,7 @@ function ProfileComponent() {
           Sign out
         </button>
 
-        <button
-          className="px-4 py-2 border font-medium border-slate-700 rounded-md hover:bg-red-400 transition-all duration-300 hover:cursor-pointer "
-          onClick={(e) => {
-            navigate("/landing")
-            localStorage.removeItem("Bearer");
-          }}
-        ></button>
+       
       </div>
     </div>
   );
