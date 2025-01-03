@@ -146,7 +146,7 @@ const AddTodo = memo(({ setAdd }) => {
 
               const token = localStorage.getItem("Bearer");
               const response = await fetch(
-                "http://192.168.2.6:3000/todo/createtodo",
+                "https://mern-todo-backend-iqs6.onrender.com/todo/createtodo",
                 {
                   method: "POST",
 
@@ -237,7 +237,7 @@ function TaskComp({ date, title, descripition }) {
       onClick={async (e) => {
         const token = localStorage.getItem("Bearer");
 
-        const response = fetch("http://192.168.2.6:3000/todo/completed", {
+        const response = fetch("https://mern-todo-backend-iqs6.onrender.com/todo/completed", {
           method: "POST",
 
           body: JSON.stringify({
@@ -253,7 +253,7 @@ function TaskComp({ date, title, descripition }) {
         });
 
         const deleteResponse = await fetch(
-          "http://192.168.2.6:3000/todo/delete",
+          "https://mern-todo-backend-iqs6.onrender.com/todo/delete",
           {
             method: "POST",
 
