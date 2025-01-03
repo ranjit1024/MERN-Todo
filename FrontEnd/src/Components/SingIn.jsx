@@ -185,7 +185,7 @@ export function SignIn() {
               }
 
               const response = await fetch(
-                "https://mern-todo-backend-iqs6.onrender.com/user/signin",
+                "http://192.168.2.6:3000/user/signin",
                 {
                   method: "POST",
 
@@ -200,7 +200,7 @@ export function SignIn() {
                 }
               );
               const data = await response.json();
-              console.log("anoterh",data.token);
+        
               if (data.message == "username Not found") {
                 setValidEmail(true);;
                 return;

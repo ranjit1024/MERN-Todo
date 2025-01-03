@@ -10,11 +10,7 @@ const  dotenv =  require("dotenv");
 const userRouter = express.Router();
 userRouter.use(express.json());
 userRouter.use(cors(
-  {
-    origin: "https://mern-todo-backend-iqs6.onrender.com",
-    
- 
- }
+  
 ));
 
 //getting jwt secret
@@ -32,8 +28,6 @@ const signupSchma = zod.object({
 userRouter.post("/signup", async (req, res) => {
   console.log("Listing..");
   const { success } = signupSchma.safeParse(req.body);
-  // console.log(req.body)
-  // console.log(success)
 
   if (!success) {
     return res.status(411).json({
@@ -73,8 +67,6 @@ userRouter.post("/signup", async (req, res) => {
     },
     JWT_SECRET
   );
-  console.log(user)
-  console.log(user._id)
 
   res.json({
     message: "You have Been Successfully Created Account",
@@ -114,7 +106,6 @@ userRouter.post("/signin", async (req, res) => {
   const userPassword = passwordFinder.password;
   //done
   const isMathch = await bcrypt.compare(req.body.password,userPassword);
-  console.log(isMathch);
 
   if(!isMathch){
     return res.status(401).json({
@@ -131,7 +122,7 @@ userRouter.post("/signin", async (req, res) => {
     JWT_SECRET
   );
 
-  console.log(token)
+
 
   res.status(200).json({
     message: "Your are an user",

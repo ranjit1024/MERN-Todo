@@ -20,7 +20,7 @@ export const todoList = atom({
         key:"fetchalltodo",
         get: async () =>{
             const token = localStorage.getItem("Bearer");
-            const response = await fetch("https://mern-todo-backend-iqs6.onrender.com/todo/listtodo",{
+            const response = await fetch("http://192.168.2.6:3000/todo/listtodo",{
                 headers: {
                     "Content-type": "application/json; charset=UTF-8",
                     authorization:`Bearer ${token}`
@@ -39,7 +39,7 @@ export const completeTodoList = atom({
         key:"fetchallcomlettodo",
         get: async () =>{
             const token = localStorage.getItem("Bearer");
-            const response = await fetch("https://mern-todo-backend-iqs6.onrender.com/todo/completetodo",{
+            const response = await fetch("http://192.168.2.6:3000/todo/completetodo",{
                 headers: {
                     "Content-type": "application/json; charset=UTF-8",
                     authorization:`Bearer ${token}`

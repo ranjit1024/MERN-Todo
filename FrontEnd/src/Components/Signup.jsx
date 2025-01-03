@@ -230,7 +230,7 @@ export function Signup() {
               }
 
               const response = await fetch(
-                "https://mern-todo-backend-iqs6.onrender.com/user/signup",
+                "http://192.168.2.6:3000/user/signup",
                 {
                   method: "POST",
 

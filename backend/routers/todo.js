@@ -5,15 +5,7 @@ const { Complete, Todo, User } =  require( "../db/index.js");
 let count = 1;
 
  const todoRouter = express.Router();
-todoRouter.use(cors(
-   {
-      origin: "https://mern-todo-backend-iqs6.onrender.com",
-    headers: {
-        "Access-Control-Allow-Origin": "https://slug-panel.onrender.com", // incorrect
-        "Access-Control-Allow-Credentials": true // incorrect
-    },
-   }
-));
+todoRouter.use(cors());
 todoRouter.use(express.json());
 
 

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo, memo } from "react";
+import { useState, useRef, useEffect, useMemo, memo,  } from "react";
 import {
   RecoilRoot,
   useRecoilState,
@@ -12,6 +12,7 @@ import {
   titleAtom,
   todoList,
 } from "../state/atom/atom.jsx";
+import { useNavigate } from "react-router-dom";
 
 function getKey() {
   let key = 1;
@@ -24,6 +25,7 @@ function getKey() {
 }
 
 export function Todo() {
+
   let [add, setAdd] = useState(false);
   let [profile, setProfile] = useState(false);
 
@@ -52,7 +54,7 @@ export function Todo() {
               onClick={(e) => {
                 document.querySelector("#complete").style.transform =
                   "translateX(-" + 0 + "%)";
-              
+
                 // document.querySelector("#complete = "red";
               }}
             >
@@ -70,18 +72,28 @@ export function Todo() {
       </div>
       <ShowCompletedTask />
 
-      <div className="absolute top-1 right-3 w-[3.5%] h-[4%] hover:cursor-pointer hover:scale-110 transition-all duration-200"
-      onClick={(e)=>{
-        setProfile(!profile)
-      }}
-      >
-       <img src="src/images/User_box_light.svg" alt="" />
+      <div className="absolute  top-1 right-3 w-[100%] h-[6%] flex justify-between">
+        <div className="">
+          <img
+            className="w-[100%] h-[100%] ml-5"
+            src="http://localhost:3000/images/logo.svg"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <img
+            className="w-[100%] h-[100%] hover:scale-105 transition-all duration-300 hover:cursor-pointer "
+            src="http://localhost:3000/images/User_box_light.svg"
+            alt=""
+            onClick={(e) => {
+              setProfile(!profile);
+            }}
+          />
+        </div>
       </div>
 
-      {
-        (profile) ? <ProfileComponent/> : null
-      }
-      {/* <ProfileComponent></ProfileComponent> */}
+      {profile ? <ProfileComponent /> : null}
     </RecoilRoot>
   );
 }
@@ -139,14 +151,12 @@ const AddTodo = memo(({ setAdd }) => {
                 return;
               }
               setAdd(false);
-              console.log(title);
-              console.log(descripition);
 
               window.location.reload();
 
               const token = localStorage.getItem("Bearer");
               const response = await fetch(
-                "https://mern-todo-backend-iqs6.onrender.com/todo/createtodo",
+                "http://192.168.2.6:3000/todo/createtodo",
                 {
                   method: "POST",
 
@@ -237,7 +247,7 @@ function TaskComp({ date, title, descripition }) {
       onClick={async (e) => {
         const token = localStorage.getItem("Bearer");
 
-        const response = fetch("https://mern-todo-backend-iqs6.onrender.com/todo/completed", {
+        const response = fetch("http://192.168.2.6:3000/todo/completed", {
           method: "POST",
 
           body: JSON.stringify({
@@ -253,7 +263,7 @@ function TaskComp({ date, title, descripition }) {
         });
 
         const deleteResponse = await fetch(
-          "https://mern-todo-backend-iqs6.onrender.com/todo/delete",
+          "http://192.168.2.6:3000/todo/delete",
           {
             method: "POST",
 
@@ -281,9 +291,7 @@ function TaskComp({ date, title, descripition }) {
               strokeWidth="1.5"
               stroke="currentColor"
               className="size-5"
-              onClick={(e) => {
-                console.log("ok");
-              }}
+              onClick={(e) => {}}
             >
               <path
                 strokeLinecap="round"
@@ -394,7 +402,6 @@ function ShowCompletedTask() {
           onClick={(e) => {
             document.querySelector("#complete").style.transform =
               "translateX(+" + 100 + "%)";
-            console.log("fds");
           }}
         >
           <path
@@ -463,35 +470,51 @@ function CompletedTaskComp({ date, title, descripition }) {
   );
 }
 
-
-function ProfileComponent(){
+function ProfileComponent() {
+  let navigate = useNavigate()
   const task = useRecoilValue(todoList);
   const completedTasks = useRecoilValue(completeTodoList);
 
-  console.log(task.length);
-  console.log(completedTasks.length);
-
-  return <div className="bg-slate-50 font-poppins p-10 absolute flex items-center justify-center flex-col top-12 right-2 rounded-lg shadow-lg shadow-gray-20 transition-all duration-300">
-   
-    <div>
-      <img src="src/images/list_15198181.png" alt="" className="w-40" />
-    </div>
-
-    <div className="flex mt-10 gap-5 ">
-      <div className="font-medium text-center">Total Tasks 
-        <p className="text-center">{task.length}</p>
+  return (
+    <div className="bg-slate-50 font-poppins p-10 absolute flex items-center justify-center flex-col top-12 right-2 rounded-lg shadow-lg shadow-gray-20 transition-all duration-300">
+      <div>
+        <img
+          src="http://localhost:3000/images/list.png"
+          alt=""
+          className="w-40"
+        />
       </div>
-      <div className="text-center font-medium text-green-500">Completed Tasks
-        <p>{completedTasks.length}</p>
+
+      <div className="flex mt-10 gap-5 ">
+        <div className="font-medium text-center">
+          Total Tasks
+          <p className="text-center">{task.length}</p>
+        </div>
+        <div className="text-center font-medium text-green-500">
+          Completed Tasks
+          <p>{completedTasks.length}</p>
+        </div>
+      </div>
+
+      <div className="mt-8">
+        <button
+          className="px-4 py-2 border font-medium border-slate-700 rounded-md hover:bg-red-400 transition-all duration-300 hover:cursor-pointer "
+          onClick={(e) => {
+            navigate("/signout")
+            localStorage.removeItem("Bearer");
+          }}
+        >
+          Sign out
+        </button>
+
+        <button
+          className="px-4 py-2 border font-medium border-slate-700 rounded-md hover:bg-red-400 transition-all duration-300 hover:cursor-pointer "
+          onClick={(e) => {
+            navigate("/landing")
+            localStorage.removeItem("Bearer");
+          }}
+        ></button>
       </div>
     </div>
-
-    <div className="mt-8">
-      <button className="px-4 py-2 border font-medium border-slate-700 rounded-md hover:bg-red-400 transition-all duration-300 hover:cursor-pointer " 
-      onClick={(e)=>{
-        localStorage.removeItem("Bearer")
-      }}
-      >Sign out</button>
-    </div>
-  </div>
+  );
 }

@@ -7,11 +7,11 @@ export default {
   theme: {
     extend: {
       backgroundImage:{
-        'hero-pattern': "url('https://mern-todo-front-end.onrender.com/src/images/topography.svg')",
-        'death': "url('https://mern-todo-front-end.onrender.com/src/images/line-in-motion.svg')",
-        "overlaping":"url('https://mern-todo-front-end.onrender.com/src/images/overlapping-circles.svg')",
-        "topo":"url('https://mern-todo-front-end.onrender.com/src/images/bubbles.svg')",
-        "todo":"url('https://mern-todo-front-end.onrender.com/src/images/personal goals checklist-bro.svg')"
+        'hero-pattern': "url('./src/images/topography.svg')",
+        'death': "url('./src/images/line-in-motion.svg')",
+        "overlaping":"url('./src/images/overlapping-circles.svg')",
+        "topo":"url('./src/images/bubbles.svg')",
+        "todo":"url('http://localhost:3000/images/main.svg')"
       },
       fontFamily:{
         "poppins":'Poppins'

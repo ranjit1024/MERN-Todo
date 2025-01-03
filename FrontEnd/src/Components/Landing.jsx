@@ -9,8 +9,9 @@ export function Landing() {
         gridTemplateColumns: "60% 40%",
       }}
     >
-      <div className="h-screen bg-green-100 bg-contain bg-todo bg-center bg-no-repeat flex items-center justify-center">
-
+      <div className="h-screen bg-green-100 bg-todo bg-contain bg-center bg-no-repeat flex items-center justify-center" style={{
+        // backgroundImage:"url('home/ranjit/Documents/Web devolement/Projects/Mini Projects/Test/FrontEnd/src/images/main.svg"
+      }}>
         
       </div>
 
@@ -126,7 +127,7 @@ export function Landing() {
           onClick={(e)=>{
              const token = localStorage.getItem('Bearer')
             if(!localStorage.getItem(token)){
-                console.log("dfsd")
+              
                navigete('/signin', {replace:true})
                return
             }
