@@ -76,7 +76,7 @@ export function Todo() {
         <div className="">
           <img
             className="w-[100%] h-[100%] ml-5"
-            src="http://localhost:3000/images/logo.svg"
+            src="https://mern-todo-59u7.onrender.com/images/logo.svg"
             alt=""
           />
         </div>
@@ -84,7 +84,7 @@ export function Todo() {
         <div>
           <img
             className="w-[100%] h-[100%] hover:scale-105 transition-all duration-300 hover:cursor-pointer "
-            src="http://localhost:3000/images/User_box_light.svg"
+            src="https://mern-todo-59u7.onrender.com/images/User_box_light.svg"
             alt=""
             onClick={(e) => {
               setProfile(!profile);
@@ -156,7 +156,7 @@ const AddTodo = memo(({ setAdd }) => {
 
               const token = localStorage.getItem("Bearer");
               const response = await fetch(
-                "http://192.168.2.6:3000/todo/createtodo",
+                "https://mern-todo-59u7.onrender.com/todo/createtodo",
                 {
                   method: "POST",
 
@@ -247,7 +247,7 @@ function TaskComp({ date, title, descripition }) {
       onClick={async (e) => {
         const token = localStorage.getItem("Bearer");
 
-        const response = fetch("http://192.168.2.6:3000/todo/completed", {
+        const response = fetch("https://mern-todo-59u7.onrender.com/todo/completed", {
           method: "POST",
 
           body: JSON.stringify({
@@ -263,7 +263,7 @@ function TaskComp({ date, title, descripition }) {
         });
 
         const deleteResponse = await fetch(
-          "http://192.168.2.6:3000/todo/delete",
+          "https://mern-todo-59u7.onrender.com/todo/delete",
           {
             method: "POST",
 
@@ -479,7 +479,7 @@ function ProfileComponent() {
     <div className="bg-slate-50 font-poppins p-10 absolute flex items-center justify-center flex-col top-12 right-2 rounded-lg shadow-lg shadow-gray-20 transition-all duration-300">
       <div>
         <img
-          src="http://localhost:3000/images/list.png"
+          src="https://mern-todo-59u7.onrender.com/images/list.png"
           alt=""
           className="w-40"
         />

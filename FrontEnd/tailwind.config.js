@@ -11,7 +11,7 @@ export default {
         'death': "url('./src/images/line-in-motion.svg')",
         "overlaping":"url('./src/images/overlapping-circles.svg')",
         "topo":"url('./src/images/bubbles.svg')",
-        "todo":"url('http://localhost:3000/images/main.svg')"
+        "todo":"url('https://mern-todo-59u7.onrender.com/images/main.svg')"
       },
       fontFamily:{
         "poppins":'Poppins'
