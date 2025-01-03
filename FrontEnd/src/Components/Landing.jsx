@@ -9,9 +9,9 @@ export function Landing() {
         gridTemplateColumns: "60% 40%",
       }}
     >
-      <div className="h-screen bg-green-100 bg-contain bg-center bg-no-repeat flex items-center justify-center">
+      <div className="h-screen bg-green-100 bg-contain bg-todo bg-center bg-no-repeat flex items-center justify-center">
 
-        <img src="./src/images/personal goals checklist-bro.svg" alt="" />
+        
       </div>
 
       <div className="flex flex-col bg-green-100  items-center justify-center gap-3">

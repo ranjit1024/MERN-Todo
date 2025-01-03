@@ -21,10 +21,7 @@ App.use("/todo", todoRouter)
 App.use(cors(
     {
         origin: "https://mern-todo-backend-iqs6.onrender.com",
-      headers: {
-          "Access-Control-Allow-Origin": "https://slug-panel.onrender.com", // incorrect
-          "Access-Control-Allow-Credentials": true // incorrect
-      },
+     
      }
 ))
 
